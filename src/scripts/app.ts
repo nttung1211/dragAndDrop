@@ -45,10 +45,23 @@ function validate(validateObj: ValidateObj) {
   alert(`${validateObj.name} is invalid!!!`);
 }
 
-class ProjectState {
-  private listeners: any[] = [];
+enum ProjectStatus { Active, Finished }
 
-  private projects: any[] = [];
+class Project {
+  constructor(
+    public id: string,
+    public title: string,
+    public description: string,
+    public people: number,
+    public status: ProjectStatus
+  ) {}
+}
+
+type Listener = (items: Project[]) => void;
+class ProjectState {
+  private listeners: Listener[] = [];
+
+  private projects: Project[] = [];
 
   private constructor() {};
 
@@ -62,17 +75,18 @@ class ProjectState {
     return this.instance;
   }
 
-  addListener(func: Function) {
+  addListener(func: Listener) {
     this.listeners.push(func);
   }
 
   addProject(title: string, desciption: string, people: number) {
-    const newProject = {
-      id: Math.ceil(Math.random() * 100),
+    const newProject = new Project (
+      Math.ceil(Math.random() * 100).toString(),
       title,
       desciption,
-      people
-    }
+      people,
+      ProjectStatus.Active
+    )
 
     this.projects.push(newProject);
 
@@ -92,7 +106,7 @@ class ProjectList {
   templateEl: HTMLTemplateElement;
   hostEl: HTMLElement;
   projectsEl: HTMLElement;
-  renderedProjects: any[];
+  renderedProjects: Project[];
 
   constructor(private type: 'active' | 'finished') {
     this.templateEl = document.querySelector('#project-list') as HTMLTemplateElement;
@@ -101,7 +115,7 @@ class ProjectList {
     this.projectsEl = document.importNode(this.templateEl.content, true).firstElementChild as HTMLElement;
     this.projectsEl.id = `${this.type}-projects`;
 
-    projectState.addListener((projects: any[]) => {
+    projectState.addListener((projects: Project[]) => {
       this.renderedProjects = projects;
       this.renderProject();
     })

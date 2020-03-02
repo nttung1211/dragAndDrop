@@ -33,6 +33,20 @@ function validate(validateObj) {
     }
     alert(`${validateObj.name} is invalid!!!`);
 }
+var ProjectStatus;
+(function (ProjectStatus) {
+    ProjectStatus[ProjectStatus["Active"] = 0] = "Active";
+    ProjectStatus[ProjectStatus["Finished"] = 1] = "Finished";
+})(ProjectStatus || (ProjectStatus = {}));
+class Project {
+    constructor(id, title, description, people, status) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.people = people;
+        this.status = status;
+    }
+}
 class ProjectState {
     constructor() {
         this.listeners = [];
@@ -49,12 +63,7 @@ class ProjectState {
         this.listeners.push(func);
     }
     addProject(title, desciption, people) {
-        const newProject = {
-            id: Math.ceil(Math.random() * 100),
-            title,
-            desciption,
-            people
-        };
+        const newProject = new Project(Math.ceil(Math.random() * 100).toString(), title, desciption, people, ProjectStatus.Active);
         this.projects.push(newProject);
         this.listeners.forEach(listener => {
             listener(this.projects);

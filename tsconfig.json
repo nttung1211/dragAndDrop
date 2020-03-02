@@ -67,7 +67,6 @@
 
   "exclude": [
     // "node_modules" // would be the default then we don't have to add this
-    "**/*ed.ts" // any files within any folders 
   ],
   // we can add included files
 }

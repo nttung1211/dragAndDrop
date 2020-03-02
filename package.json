@@ -1,0 +1,46 @@
+{
+  "name": "5-advanced-js",
+  "version": "1.0.0",
+  "scripts": {
+    "live": "webpack-dev-server --watch",
+    "live-o": "webpack-dev-server --watch --open",
+    "build": "webpack",
+    "build-p": "webpack -p"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/runtime-corejs3": "^7.7.4",
+    "autoprefixer": "^9.7.1",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.0.5",
+    "css-loader": "^3.2.0",
+    "file-loader": "^4.2.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "imagemin-gifsicle": "^6.0.1",
+    "imagemin-mozjpeg": "^8.0.0",
+    "imagemin-pngquant": "^8.0.0",
+    "imagemin-svgo": "^7.0.0",
+    "img-loader": "^3.0.1",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.13.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "core-js": "^3.6.4",
+    "imagemin": "^7.0.0",
+    "jquery": "^3.4.1",
+    "uniqid": "^5.2.0"
+  }
+}

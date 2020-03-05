@@ -16,12 +16,13 @@ module.exports = {
         aggregateTimeout: 100
     },
     entry: {
-        App: './src/scripts/app.js'
+        App: './src/ts/app.ts'  //***TS***
     },
     output: {
-        filename: './[name].bundle.js',
+        filename: '[name].bundle.js', // './[name].bundle.[contenthash].js'
         path: path.resolve(__dirname, './docs'),
     },
+    devtool: 'inline-source-map',   
     module: {
         rules: [
             // {
@@ -38,6 +39,11 @@ module.exports = {
             //         }
             //     ]
             // },
+            {   //***TS***
+                test: /\.ts$/,
+                exclude: /(node_modules|bower_components)/,
+                use: 'ts-loader'
+            },
             {
                 test: /\.scss$/,
                 use: [
@@ -77,13 +83,16 @@ module.exports = {
             }
         ]
     },
+    resolve: {
+        extensions: ['.ts', '.js'] // ***TS*** js is in case there are other js files
+    },
     plugins: [
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery'
         }),
         new MiniCssExtractPlugin({
-            filename: './[name].bundle.css'
+            filename: '[name].bundle.css'
         }),
         new HtmlWebpackPlugin({
             template: './src/index.html'
